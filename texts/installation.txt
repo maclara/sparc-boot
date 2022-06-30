@@ -1,0 +1,61 @@
+                        <p><a name="require"><strong>Requirements</strong></a></p>
+
+                        <p>SILO is supported on Linux and Solaris for SPARC and UltraSPARC processors.
+                        To be able to compile and install the latest version of SILO you will need
+                        at least:</p>
+                        <ul>
+                            <li><a href="http://sources.redhat.com/binutils/">GNU binutils</a>,
+                                a GNU collection of binary utilities.</li>
+                            <li><a href="http://gcc.gnu.org/">GCC</a> from the GNU Compiler Collection</a>.
+                                For GCC we suspect that egcs1.1.2, gcc-2.95.4, gcc-3.x and recent gcc-4.x
+                                are good choices.</li>
+                        </ul>
+
+                        <p>For the building of the first and second stage boot loader, and TILO  
+                        (Linux only), you will also need:
+                        <ul>
+                           <li><a href="http://www.sparc-boot.org/elftoaout/">elftoaout</a>, for the
+                               converting of 32-bit or 64-bit SPARC ELF images to a.out format</li>
+                           <li><a href="http://e2fsprogs.sourceforge.net/">e2fsprogs</a> package.
+                               With Linux distributions, you need the header files included for instance
+                               in the <tt>e2fsprogs-devel</tt> package for
+                               <a href="http://fedora.redhat.com/">Fedora</a>, or the <tt>e2fslibs-dev</tt>
+                               package for
+                               <a href="http://www.debian.org/">Debian</a> based systems.</li>
+                        </ul></p>
+
+                        <p>As of version 0.8.7, SILO can't be used directly to use bootable CD
+                        images. The <a href="ftp://ftp.berlios.de/pub/cdrecord/alpha/">cdrtools</a> package,
+                        by J&#246;rg Schilling, contains <tt>mkisofs</tt>, which should be used instead.</p>
+
+                        <p><a name="building"><strong>Building</strong></a></p>
+
+                        <p>After extracting the SILO package enter the directory 
+                        <tt>silo-&lt;version&gt;</tt>, and type <tt>make</tt>.</p>
+
+                        <p>Note that the first and second stage boot block can be built only under 
+                        SPARC/Linux, even if you wish to install SILO on a system with only
+                        Sun Solaris installed.
+                        If this is the case you will need the 
+                        <tt>silo-loaders-&lt;<i>version</i>&gt;.tar.gz</tt> package, which basically
+                        holds all the necessary files for the <tt>/boot</tt> directory in pre-compiled
+                        form.</p>
+
+                        <p>After the message 
+                        &quot;<tt>SILO build for SPARC/Linux completed</tt>&quot;, or
+                        &quot;<tt>SILO build for SPARC/Solaris completed</tt>&quot; enter 
+                        <tt>make install</tt> to install the boot loaders, <tt>silo</tt>,
+                        <tt>tilo</tt>, the configuration file <tt>silo.conf</tt>, and the manual pages.
+                        The file locations after the installation are:</p>
+                        <ul>
+                            <li><tt>/boot</tt> for the boot loaders</li>
+                            <li><tt>/sbin</tt> for <tt>silo</tt></li>
+                            <li><tt>/etc</tt> for <tt>silo.conf</tt></li>
+                            <li><tt>/usr/sbin</tt> for <tt>silocheck</tt></li>
+                            <li><tt>/usr/bin</tt> for <tt>tilo</tt> and <tt>maketilo</tt></li>
+                            <li><tt>/usr/share/man</tt> for the manual pages</li>
+                        </ul> 
+
+                        <p>Optionally, you can create SILO <a href="http://www.rpm.org/">RPM</a> packages
+                        by using the <tt>silo.spec</tt> file from the source tree.</p>
+

@@ -1,0 +1,55 @@
+            body,form,input,ol,p,td,th,tr,ul,strong {
+               font-family: helvetica, arial, sans-serif;
+               font-size: 10pt;
+               letter-spacing: 0px;
+            }
+            
+            pre,tt { 
+               font-family: courier, times, system, serif; 
+               font-size: 10pt;
+            }
+            
+            .backdrop {
+               background-image: url("images/bg.png");
+            }
+            
+            .front {
+               background: lightgrey;
+               background-image: url("images/topback.png");
+               font-family: helvetica, arial, sans-serif;
+               font-size: 10pt;
+               letter-spacing: 0px;
+            }
+            
+            .quitesmall {
+               font-size: 8pt;
+            }
+            
+            .syn30 {
+               font-family: courier, times, system, serif; 
+               font-size: 10pt;
+               text-indent: 30pt;
+            }
+            
+            .syn60 {
+               font-family: courier, times, system, serif; 
+               font-size: 10pt;
+               text-indent: 60pt;
+            }
+            
+            .tab {
+               text-indent: 15pt;
+            }
+            
+            .tabtab {
+               text-indent: 30pt;
+            }
+            
+            .topleft {
+               background-image: url("images/topleft.png");
+               margin: 0px;
+            }
+            
+            .topmain {
+               margin: 0px;
+            }

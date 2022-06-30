@@ -1,0 +1,23 @@
+                        <p><a name="lists"><strong>Mailing Lists</strong></a></p>
+
+                        <p>There are several mailing lists available where discussions and
+                        questions regarding SILO are welcome:</p>
+                        <ul>
+                            <li>sparclinux at vger.kernel.org, the list for Linux on SPARC processors.
+                               <p>To subscribe, send a message to <a href="mailto:Majordomo@vger.kernel.org">
+                               Majordomo at vger.kernel.org</a> with the words &quot;subscribe 
+                               sparclinux&quot;, followed by your email address.</p>
+                               <p>To send messages to the list you can use the address 
+                               <a href="mailto:sparclinux@vger.kernel.org">sparclinux at vger.kernel.org</a>.
+                               To unsubscribe, send a message to <a href="mailto:Majordomo@vger.kernel.org">
+                               Majordomo at vger.kernel.org</a> with the words unsubscribe sparclinux,
+                               followed by your email address.</p>
+                               <p>Archives for this list can be found for instance at the
+                               <a href="http://marc.theaimsgroup.com/?l=linux-sparc;r=1;w=2">Mailing
+                               list ARChives at AIMS</a>.</p></li>
+                        </ul>
+                        <p>Information about SPARC specific mailing lists for Linux distributions can be 
+                        found at <a href="http://www.ultralinux.org/lists.html">UltraLinux.org</a>.
+                        This is also the place where <a href="http://www.ultralinux.org/faq.html">
+                        Frequently Asked Questions</a> regarding SILO are answered.</p>
+                        

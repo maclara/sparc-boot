@@ -1,0 +1,38 @@
+                        <p><a name="download"><strong>Download</strong></a></p>
+
+                        <p>The latest version of the SILO package can be found at</p>
+                        <ul>
+                            <li><a href="http://www.sparc-boot.org/pub/silo/">
+                                http://www.sparc-boot.org/pub/silo</a></li>
+                        </ul>
+
+                        <p>or at one of the <a href="#mirrors">mirror sites</a>.</p>
+
+                        <p>You can also retrieve SILO through Git.
+                        Git is a fast version control system, and can be obtained from
+                        <a href="http://www.kernel.org/pub/software/scm/git/">http://www.kernel.org/pub/software/scm/git/</a>.
+                        You can also find more information about Git and related tools at
+                        <a href="http://git.or.cz/">http://git.or.cz</a></p>
+                        <p>The command to clone the SILO source with GIT is:</p>
+                        <p><tt>git clone git://git.kernel.org/pub/scm/linux/kernel/git/bcollins/silo.git</tt></p>
+                        <p>In addition, the Git tree can be accessed via a web interface at</p>
+                        <ul>
+                           <li><a href="http://www.kernel.org/git/?p=linux/kernel/git/bcollins/silo.git;a=tree">
+                           http://www.kernel.org/git/?p=linux/kernel/git/bcollins/silo.git;a=tree</a></li>
+                        </ul>
+
+                        <p><a name="mirrors"><strong>Mirrors</strong></a></p>
+
+                        <p>Mirrors of the SILO pages and packages can be found at the following locations:</p>
+                        <p>Pages:</p>
+                        <ul>
+                           <li><a href="http://silo.auxio.org/">
+                              http://silo.auxio.org/</a></li>
+                        </ul>
+                        <p>Packages:</p>
+                        <ul>
+                           <li><a href="http://silo.auxio.org/pub/">
+                              http://silo.auxio.org/pub</a></li>
+                           <li><a href="ftp://ftp.auxio.org/pub/Linux/silo/">
+                              ftp://ftp.auxio.org/pub/Linux/silo</a></li>
+                        </ul>

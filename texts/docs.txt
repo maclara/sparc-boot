@@ -1,0 +1,15 @@
+                        <p><a name="docs"><strong>Documentation</strong></a></p>
+
+                        <p>Additional SILO documentation can be found in the man pages
+                         and in the <tt>docs/</tt> directory in the source package.</p>
+                          
+                        <p>You can also read the most current files on-line:
+                        <p>
+                         <a href="http://www.kernel.org/git/?p=linux/kernel/git/bcollins/silo.git;a=blob;f=docs/README">README</a>,
+                          the (original) SILO documentation.
+                         <br/><a href="http://www.kernel.org/git/?p=linux/kernel/git/bcollins/silo.git;a=blob;f=docs/README.tilo">README.tilo</a>,
+                           the TFTP boot loader.
+                         <br/><a href="http://www.kernel.org/git/?p=linux/kernel/git/bcollins/silo.git;a=blob;f=first-isofs/README.SILO_ISOFS">README.SILO_ISOFS</a>,
+                          HOWTO make a Sparc bootable CDROM with SILO.
+                        </p>
+

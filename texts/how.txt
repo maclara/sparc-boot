@@ -1,0 +1,44 @@
+                        <p><a name="how"><strong>How does it work?</strong></a></p>
+
+                        <p>At boot time, after hardware checks and device initialization are performed,
+                        the PROM of a SPARC loads a boot block from a boot device such as a hard disk 
+                        drive, CD-ROM, or a network card. 
+                        This boot block is so short (512 Bytes) that a full featured boot loader will
+                        not fit into this space, especially since file systems like ext2 reserve only
+                        1024 Bytes for a boot block, while the partition table itself already takes up 
+                        512 Bytes.</p>
+
+                        <p>To overcome this lack of space, SILO consists of a collection of stage loaders,
+                        as shown in the figure below:</p>
+                        <a href="images/bootchart.png"><img src="images/smallbootchart.png" border="0" alt="silo boot flowchart" /></a>
+                        <p>The first stage boot loader (<tt>/boot/first.b</tt>), written completely in 
+                        assembly language, is used only to retrieve a second stage boot loader
+                        (<tt>/boot/second.b</tt>).
+                        This second stage boot loader loads the actual operating system. It 
+                        understands file systems, allowing the parsing of the configuration file
+                        and the handling of compressed files. It also provides a command-line
+                        interface to interactively select entries from the configuration file, to
+                        add boot parameters, or to load a path you entered on the SILO command 
+                        line prompt. See <a href="usingsilo.html">Using SILO</a> for more information about
+                        using the SILO prompt.</p>
+
+                        <p>The program <tt>/sbin/silo</tt> is used to install the first stage loader by 
+                        copying the right first stage loader into the boot block (unless the correct
+                        first stage is already installed and the <tt>-f</tt> option is not used to 
+                        force the installation).</p>
+
+                        <p><tt>/sbin/silo</tt> then writes the block number of the first block of the 
+                        second stage boot loader (usually <tt>/boot/second.b</tt>) into it, and then
+                        records all the block numbers of <tt>second.b</tt> and the name and location 
+                        of the configuration file into the second stage boot loader.</p>
+                        <p>If the file <tt>old.b</tt> can't be found in the <tt>/boot</tt> directory, the
+                        old boot loader will be copied there by <tt>/sbin/silo</tt>. </p>
+
+                        <p>The configuration file <a href="config.html"><tt>/etc/silo.conf</tt></a> is 
+                        parsed by the actual boot loader at boot time. 
+                        This means that the <tt>/sbin/silo</tt> program must be run only if you 
+                        install a new version of SILO or if you move the second stage 
+                        boot loader on the disk. This is different from the LILO boot loader on the 
+                        i386 platform where you must run LILO each time when you have installed new 
+                        kernel images or operating systems.</p>
+           

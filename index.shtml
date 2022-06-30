@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html
+   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+   <head>
+      <!--#set var="last-mod-by" value="pkrul at auxio.org" -->
+      <!--#config timefmt="%A %B %d, %Y" -->
+      <title>SILO - The Sparc Improved Boot Loader</title>
+      <meta name="keywords" content="SILO, Sparc, UltraSPARC, bootblock,
+         bootloader, silo.conf, SparcLinux, UltraLinux, sparc-boot.org" />
+      <link type="image/x-icon" rel="SHORTCUT ICON" href="images/favicon.ico" />
+      <style type="text/css">
+         <!--
+<!--#include virtual="style/default.css" -->
+         -->
+      </style>
+   </head>
+   <body class="backdrop" style="margin-top: 0px">
+      <table border="0" cellspacing="0" cellpadding="0" width="810">
+         <tr>
+            <td class="topleft" valign="bottom" width="160">
+               <!--Reserved for something, e.g. search -->
+<!--#include virtual="texts/topleft.txt" -->
+            </td>
+            <td class="topmain" width="640">
+               <img src="images/topmain.png" border="0" alt="Sparc-Boot.org logo" />
+            </td>
+         </tr>
+      </table>
+      <table border="0" cellspacing="0" cellpadding="0" width="810">
+         <tr valign="top">
+            <td valign="top" width="175">
+               <br />&middot;<a href="index.html">What is SILO?</a>
+               <br />&middot;<a href="how.html">How does it work?</a>
+               <br />&middot;<a href="installation.html">Installation</a>
+               <br />&middot;<a href="config.html">Configuration</a>
+               <br />&middot;<a href="usingsilo.html">Using SILO</a>
+               <br />&middot;<a href="usingtilo.html">Using TILO</a>
+               <br />&middot;<a href="download.html">Download</a>
+               <br />&middot;<a href="changelog.html">Changes</a>
+               <br />&middot;<a href="docs.html">Documentation</a>
+               <br />&middot;<a href="lists.html">Mailing Lists</a>
+               <br />&middot;<a href="links.html">Links</a>
+               <br />&middot;<a href="credits.html">Credits</a>
+               <br />&middot;<a href="license.html">Code License</a>
+            </td>
+            <td valign="top">
+               <table cellpadding="5" cellspacing="0" border="1">
+                  <tr>
+                     <td width="620" class="front" valign="top">
+<!--#include virtual="texts/index.txt" -->
+                     </td>
+                  </tr>
+                  <tr>
+                     <td align="right">
+                        <small class="quitesmall">
+                           Last update:
+                           <!--#flastmod file="texts/index.txt" --> 
+                           <!--#echo var="last-mod-by" --> &nbsp;
+                        </small>
+                     </td>
+                  </tr>
+               </table>
+            </td>
+         </tr>
+      </table>
+      <!--Several mirroring tools such as wget do not mirror directories from style sheets -->
+      <img src="images/pixel.png" border="0" alt="" />
+   </body>
+</html>

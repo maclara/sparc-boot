@@ -1,0 +1,25 @@
+                        <p><a name="credits"><strong>Credits</strong></a></p>
+
+                        <p>The following people are known to have worked on SILO
+                        (ordered by first name):</p>
+                        <ul>
+                            <li>Adrian Rodrigues</li>
+                            <li>Andrew Tridgell</li>
+                            <li>Ben Collins</li>
+                            <li>David S. Miller</li>
+                            <li>Donnie J. Barnes</li>
+                            <li>Eddie C. Dost</li>
+                            <li>Jakub Jelinek</li>
+                            <li>Mark Adler</li>
+                            <li>Martin Beran</li>
+                            <li>Mauricio Plaza Villegas</li>
+                            <li>Miguel de Icaza</li>
+                            <li>Pete Zaitcev</li>
+                            <li>Piete Brooks</li>
+                            <li>Tom Dyas</li>
+                            <li>Wernel Almesberger</li>
+                        </ul>
+                        <p>If you feel that your name should have been included, or have any other 
+                        comments regarding these pages, please let 
+                        <a href="mailto:silo@ultralinux.nl">us</a> know.</p>
+                        

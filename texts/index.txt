@@ -1,0 +1,59 @@
+                        <p><a name="whatis"><strong>What is SILO?</strong></a></p>
+
+                        <p>SILO, the Sparc Improved boot LOader, is a booting loader 
+                        program that runs from the PROM of SPARC (32-bit) and UltraSPARC (64-bit) 
+                        based systems, covered by the terms of the GNU General Public Licence.
+                        It can be used for the booting of operating systems from a
+                        variety of file systems.</p>
+
+                        <strong>Supported Operating Systems:</strong>
+                        <ul>
+                           <li type="square">Linux</li>
+                           <li type="square">SunOS</li>
+                           <li type="square">Sun Solaris</li>
+                        </ul>
+                        <strong>Supported Filesystems:</strong>
+                        <ul>
+                           <li type="square">EXT2FS</li>
+                           <li type="square">EXT3FS</li>
+                           <li type="square">ISO9660</li>
+                           <li type="square">ROMFS</li>
+                           <li type="square">UFS</li>
+                        </ul>
+             
+                        <strong>Additional Features:</strong>
+                        <ul>
+                           <li type="square"><strong>Configuring and reconfiguring without re-installation</strong>
+                              <p>SILO reads it's configuration file directly from the filesystem, thus
+                                 changes in the configuration can be made without any need to reinstall the boot loader.</p>
+                           </li>
+                           <li type="square"><p><strong>Possibility to interact with SILO at boot time</strong></p>
+                               <ul>
+                                  <li type="radio"><strong>Select boot paths</strong>
+                                     <p>You can configure SILO so you can choose what operating systems to boot, or enter
+                                        a path to a device or file from the SILO prompt.</p>
+                                  </li>
+                                  <li type="radio"><strong>File name completion on the SILO prompt</strong>
+                                     <p>SILO has built-in support for the well-known &lt;tab&gt; completion as found in many shells,
+                                        making working on the prompt much faster and easier.</p>
+                                  </li>
+                                  <li type="radio"><strong>Use built-in commands from the SILO prompt</strong>
+                                    <p>SILO has built-in versions of the <tt>cat(1)</tt> and <tt>ls(1)</tt> commands, making
+                                       it possible to view files and directories and their properties on supported filesystems.</p>
+                                 </li>
+                              </ul>
+                           </li>
+                           <li type="square"><strong>Transparant GZIP decompression of files upon loading</strong>
+                              <p>Files to be handled by SILO can be in either uncompressed or GZIP compressed format,
+                              where an initial ramdisk should be in uncompressed format.</p>
+                           </li>
+                           <li type="square"><strong>Make other media bootable</strong>
+                               <p>You can use SILO's special bootblock to create bootable ISO-9660 images.</p>
+                           </li>
+                        </ul>
+
+                        <p>The Trivial Image Loader for SPARC (TILO) is also included in the SILO package.
+                        TILO is a tool for building a simple TFTP boot loader which embodies several
+                        kernel images for different Sun architectures and a ramdisk root image in 
+                        a compressed form. See <a href="usingtilo.html">Using TILO</a> for more
+                        information.</p>

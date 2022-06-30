@@ -1,0 +1,453 @@
+                        <p><a name="conf"><strong>Configuration - The silo.conf file</strong></a></p>
+
+                        <p><tt>silo.conf</tt> is a configuration file for SILO which is read during
+                        booting by the second stage boot loader.</p>
+
+                        <p>It provides instructions for SILO, including which kernels or other
+                        operating systems to load and what options to pass to them. Unlike the LILO
+                        bootloader on the Intel platform, SILO reads and parses the configuration
+                        file at boot time. This means that any changes can be made to the 
+                        configuration file and if the system is shut down properly or the config file 
+                        makes it to the disk, SILO will use it on next bootup.</p>
+
+                        <p>SILO is able to boot kernels even without this configuration 
+                        file or if this file is crippled or contains syntax errors, but the user has 
+                        to enter full PROM names and full path of the images to load and all options 
+                        required for them manually.</p>
+
+                        <p><a name="syntax"><strong>Syntax</strong></a></p>
+                        <p>The configuration file consists of comments and variable assignments:</p>
+
+                        <p><u>Comments</u> start with a &quot;<tt>#</tt>&quot; character, and continue to
+                        the end of the line.</p>
+
+                        <p><u>Flag variables</u> consist of a single keyword and are followed by
+                        whitespace or the end of the file.</p>
+                        
+                        <p><u>String variables</u> consist of the variable name, optional  
+                        <a href="#arch">architecture scope</a>, optional whitespace, an 
+                        &quot;<tt>=</tt>&quot; character, optional whitespace, the value and
+                        required whitespace, or the end of the file.</p>
+                        
+                        <p><a name="arch"><u>Architecture scope</u></a> is allowed only for 
+                        variable names <tt>image</tt> and <tt>other</tt>. It must directly follow a 
+                        variable name without any whitespace and consists of the 
+                        &quot;<tt>[</tt>&quot; character, a subset of case-insensitive tokens 
+                        <tt>sun4, sun4c, sun4d, sun4e, sun4m</tt> and/or <tt>sun4u</tt>,  separated
+                        by the &quot;<tt>,</tt>&quot; character (no whitespace is  allowed between
+                        the comma character), and ends with the  &quot;<tt>]</tt>&quot; character.</p>
+
+                        <p>An example:</p>
+                        <p class="syn30">image[sun4c,sun4d,sun4m]=/boot/vmlinux32.gz</p>
+                        <p>This will declare <tt>image</tt> with the specified file name only on 
+                        sun4c, sun4d or sun4m.</p>
+                        
+                        <p><a name="devicenames"><u>Device names</u></a> depend on the PROM
+                        version of the machine used during bootup. </p>
+
+                        <p>For older PROM's (v0), the device name syntax is:</p>
+                        <p class="syn30">&lt;xx&gt;(&lt;m&gt;,&lt;n&gt;,&lt;o&gt;)</p>
+                        where:
+                        <ul>
+                            <li><tt>&lt;xx&gt;</tt> is one of <i><tt>sd, st, xd, xy, fd, le</tt></i>
+                                or <i><tt>ie</tt></i></li>
+                            <li><tt>&lt;m&gt;</tt> is the controller number as decimal number</li>
+                            <li><tt>&lt;n&gt;</tt> is the device id as decimal number</li>
+                            <li><tt>&lt;o&gt;</tt> is the zero based partition number.</li>
+                        </ul>
+                        <p>Examples:</p>
+                        <ul>
+                            <li><tt>sd(0,3,0)</tt></li>
+                            <li><tt>fd(0,0,0)</tt></li>
+                        </ul>
+                        
+                        <p>For newer PROMs (v2) and all PROM's in the 64bit SPARC machines the syntax
+                        is:</p>
+                        <p class="syn30">&lt;fully_qualified_prom_device_name&gt;[:&lt;partition_letter&gt;]</p>
+                        <p>where the fully qualified PROM device name starts with a
+                        &quot;<tt>/</tt>&quot; character for the root of the PROM device tree, and
+                        contains all the nodes from the root in the tree up to the disk device node.
+                        If some node contains more than one child node with the same name and the
+                        path has to go through such node, an &quot;<tt>@</tt>&quot; character
+                        followed by the hexadecimal address pair is desirable to resolve the
+                        ambiguity. Optional partition number is a &quot;<tt>:</tt>&quot; character
+                        followed by a letter <tt>a</tt> (for first partition) through <tt>h</tt> (for
+                        last, 8th, partition).  v2 PROM device names might look like:</p>
+                        <div class="syn30">/sbus@3,0/SUNW,fas@3,8800000/sd@0,0</div>
+                        <div class="syn30">/iommu/sbus/espdma@5,8400000/esp@5,8800000/sd@6,0:d</div>
+                        <div class="syn30">/pci@1f,0/pci@1,1/ide@3/disk@2,0</div>
+                        <div class="syn30">/pci@1f,4000/ide/ata@0,0/cmdk@0,0</div>
+                        <p>v2 PROM device names if specified as part of the file name 
+                        (see <a href="#filenames">File Names</a> below) should be followed by the 
+                        &quot;<tt>;</tt>&quot; character to separate the device name from the optional 
+                        Linux partition number (note that there can be two partition numbers specified, 
+                        the latter takes precedence) and from the required pathname. Variable names are 
+                        case <i>in</i>sensitive, values of string variables are case sensitive.</p>
+                        
+                        <p>Variable names are case <i>in</i>sensitive, values of string variables are
+                        case sensitive.</p>
+                        
+                        <p>Blanks and equal signs may only be part of a variable name
+                        or a value if they are escaped by a backslash or if the value is embedded in
+                        double quotes. An equal sign may not be the only character in a name or
+                        value.</p>
+                        
+                        <p>An escaped tab is converted to an escaped blank. An escaped
+                        newline is removed from the input stream. An escaped backslash (i.e. two
+                        backslashes) is converted to a backslash. Inside quoted strings, only double
+                        quotes, backslashes and newlines can be escaped.</p>
+                        
+                        <p><a name="filenames"><strong>File names</strong></a></p>
+
+                        <p>Some string variables are expecting <u>file names</u>.
+                        A file name format in SILO is:</p>
+                        <p class="syn30">[&lt;devicename&gt;][&lt;part&gt;]&lt;absolute_pathname&gt;</p>
+                        or
+                        <p class="syn30">[&lt;devicename&gt;][&lt;part&gt;][[&lt;m&gt;-&lt;n&gt;]]</p>
+                        <p>The first form refers to a file or directory on some supported filesystem 
+                        (currently ext2fs, ext3fs, ufs, romfs or iso9660), the latter refers to a
+                        range of 512B blocks on a device.</p>
+
+                        <p>For a device block range, either <tt>&lt;devicename&gt;</tt>, or 
+                        <tt>&lt;part&gt;</tt>, or <tt>[&lt;m&gt;-&lt;n&gt;]</tt> must be given. If the 
+                        last part is not given, it defaults to [1-16] (ie. 7680 bytes from offset 512 
+                        in the device, the normal SPARC boot block location).</p>
+
+                        <p>Optional <tt>&lt;devicename&gt;</tt> is the PROM name of the device where the 
+                        file or range is located on. See <a href="#devicenames">Device Names</a> above 
+                        for its syntax. For v2 and P1275 PROM's, the device name must be immediately 
+                        followed by the &quot;<tt>;</tt>&quot; character. The default is the boot 
+                        device SILO was booted from.</p>
+
+                        <p>Optional <tt>&lt;part&gt;</tt> is the 1 based partition number on the device. 
+                        First partition is 1 (e.g. on <tt>/dev/sda</tt> in Linux is this 
+                        <tt>/dev/sda1</tt>). The default is the default partition (the value of the 
+                        partition variable in the config file).</p>
+
+                        <p><tt>&lt;absolute_pathname&gt;</tt> must start with a &quot;<tt>/</tt>&quot; 
+                        character and is the pathname from the root of the file system on that device
+                        (unless it is the root filesystem; This is different to the pathname you will 
+                        see in Linux).</p>
+
+                        <p><tt>&lt;m&gt;</tt> is the first block number (in blocksize 512 bytes) of the 
+                        range to be loaded and <tt>&lt;n&gt;</tt> is the last block number plus one.</p>
+                        
+                        <p>The filename can also include two special tokens: <tt>cat</tt> and
+                        <tt>ls</tt>. Both have to be followed by whitespace and
+                        some filename (directory name in the <tt>ls</tt> case). <tt>ls</tt> can have
+                        options between the <tt>ls</tt> token and the directory name. <tt>cat</tt>
+                        causes the filename to be loaded and printed to the screen instead of being
+                        executed, <tt>ls</tt> causes a directory listing to
+                        be generated to the screen. <tt>ls</tt> uses syntax:</p>
+                        <p class="syn30">ls [-[l][t][r]] &lt;<i>dirname</i>&gt;</p>
+                        <p>Option <tt>l</tt> generates long listing instead of listing only filenames,
+                        option <tt>t</tt> sorts by mtime instead of name and <tt>r</tt> reverses the
+                        sorting.  As both <tt>cat</tt> and <tt>ls</tt> require white space between
+                        the token and the filename, you should surround them with double quotes:</p>
+                        <div class="syn30">image=&quot;cat /etc/passwd&quot;</div>
+                        <div class="syn30">image=&quot;ls /lib/modules/&quot;</div>
+                        <div class="syn30">image=&quot;ls -lt /lib/&quot;</div>
+                        
+                        <p><a name="global"><strong>Global Options</strong></a></p>
+
+                        <p><tt>/etc/silo.conf</tt> begins with a possibly empty global options section.
+                        This section contains all variable assignments up to the first encountered
+                        <tt>image</tt> or <tt>other</tt> setting.</p>
+
+                        <p>The following global options are recognized:</p>
+                        <ul>
+                            <li><p><tt>default=<i>name</i></tt>
+                                <br />uses the specified image as the default boot image.
+                                If <tt>default</tt> is omitted, the image appearing first in the 
+                                configuration file is used.</p></li>
+                            <li><p><tt>message=<i>message_filename</i></tt>
+                                <br />specifies a file containing a message that is displayed before 
+                        	the boot prompt.</p> </li>
+                            <li><p><tt>partition-boot</tt>
+                                <br />This flag causes the same functionality as the
+                                <a href="usingsilo.html#command"><tt>-t</tt></a> command
+                                line option for the silo program, which stores the boot block into
+                                the same partition as the second stage loader.</p></li>
+                            <li><p><tt>password=<i>password</i></tt>
+                                <br />This protects booting by a password. 
+                                The password is given in cleartext in the configuration file. Because 
+                        	of that, the configuration file should be only readable by the super 
+                        	user and the password should differ if possible from other passwords 
+                        	on the system.</p></li>
+                            <li><p><tt>restricted</tt>
+                                <br />A password is only required to boot the image 
+                                specified in <tt>/etc/silo.conf</tt> if parameters are specified on 
+                        	the command line or if the image is not specified in the 
+                        	configuration file at all (ie. arbitrary file load).</p></li>
+                            <li><p><tt>secondary=<i>filename</i></tt>
+                                <br />Forces the second stage boot loader to be other than
+                                <tt>/boot/second.b</tt>. Same as the 
+                                <a href="usingsilo.html#command"><tt>-b</tt></a> command line option.
+                                This can be overriden by the command line option.</p></li>
+                            <li><p><tt>timeout=<i>tsecs</i></tt>
+                                <br />Sets a timeout (in tenths of a second) for keyboard input. 
+                        	If no key is pressed for the specified time, the first image is 
+                        	automatically booted.</p></li>
+                        </ul>
+                        <p>In addition to these global options, the following 
+                        <a href="#perimage">per-image</a> options can be specified in the global 
+                        section:</p>
+                        <ul>
+                            <li><tt>append</tt></li>
+                            <li><tt>device</tt></li>
+                            <li><tt>fill-reboot-cmd</tt> </li>
+                            <li><tt>image</tt></li>
+                            <li><tt>initrd-prompt</tt> </li>
+                            <li><tt>initrd-size</tt></li>
+                            <li><tt>initrd</tt></li>
+                            <li><tt>other</tt> </li>
+                            <li><tt>partition</tt> </li>
+                            <li><tt>pause-after</tt></li>
+                            <li><tt>pause-message</tt> </li>
+                            <li><tt>ramdisk</tt></li>
+                            <li><tt>read-only</tt> </li>
+                            <li><tt>read-write</tt> </li>
+                            <li><tt>root</tt></li>
+                        </ul>
+                        <p>They are used as defaults if they aren't specified in the configuration 
+                        sections of the respective kernel images and will be used also for the 
+                        arbitrary images specified on the input line and not mentioned in the 
+                        configuration file (unless overridden by input line options).</p>
+
+                        <p><a name="perimage"><strong>Per-Image Options</strong></a></p>
+                        A per-image section starts with either a line
+                        <p class="syn30">image=<i>filename</i></p>
+                        <p>for booting from files, or</p>
+                        <p class="syn30">other=<i>partition_name</i></p>
+                        <p>for booting from device ranges.</p>
+
+                        <p>The <tt>image</tt> or <tt>other</tt> tokens can be directly followed by an
+                        <a href="#arch">architecture scope</a>. In that case, the <tt>image</tt> 
+                        declaration will be only available if the architecture of the booting machine
+                        is listed in the scope. If it is not listed, the whole <tt>image</tt> or 
+                        <tt>other</tt> line and the following related section will be treated as not 
+                        being present in the configuration file.</p>
+                        
+                        <p><i>partition_name</i> in the <tt>other</tt> setting is a normal filename, as
+                        described in the section <a href="#filenames">File Names</a>, but without the 
+                        <tt>&lt;absolute_pathname&gt;</tt> part. So it is either a single partition 
+                        number (starting with 1), or a device name (for v2 and P1275 PROMs followed by
+                        a &quot;<tt>;</tt>&quot; character) followed by a partition number.</p>
+
+                        <p>Examples:</p>
+                        <div class="syn30"># Example with device for v0 PROM:</div>
+                        <div class="syn60">other=sd(0,2,0)3</div>
+                        <br />
+                        <div class="syn30"># Example with device for v2 or P1275 PROM:</div>
+                        <div class="syn60">other=/iommu/sbus/espdma/esp/sd@3,0;3</div>
+                        
+                        <p>From the <tt>image</tt> or <tt>other</tt> line on until next <tt>image</tt>
+                        or <tt>other</tt> line are variable assignments and flags for this image's
+                        section. The following options and flags are recognized:</p>
+                        <ul>
+                            <li><p><tt>label=<i>name</i></tt>
+                                 <br />The boot loader uses the main <tt>file name</tt> (without it's
+                                 path of each image specification to identify that image. 
+                                 A different name can be used by setting the variable <tt>label</tt>.
+                        	 </p> </li>
+                            <li><p><tt>alias=<i>name</i></tt>
+                                <br />A second name for the same entry can be used by specifying an 
+                        	alias.</p></li>
+                            <li><p><tt>partition=<i>part_no</i></tt>
+                                <br />Specifies the default partition number (a digit between 1 and 8,
+                        	<tt>/dev/sda1</tt> is <i>part_no</i> 1) to be used if some filename 
+                        	does not explicitely specify a partition number.</p></li>
+                            <li><p><tt>device=<i>string</i></tt>
+                                <br />Specifies the default device name to be 
+                                used if some filename does not specify a partition number explicitely.
+                                This defaults to the device SILO has been booted from if you don't 
+                        	specify <tt>device</tt> in either the global section or per-image 
+                        	section of the configuration file.</p></li>
+                            <li><p><tt>append=<i>string</i></tt>
+                                <br />Appends the options specified to the parameter line passed to the 
+                        	kernel. This is typically used to specify parameters of hardware that 
+                        	can't be entirely auto-detected or for which probing may be dangerous,
+                        	for example:</p>
+                        	<p class="syn30">append=&quot;video=sbusfb:off&quot;</p></li>
+                            <li><p><tt>literal=<i>string</i></tt>
+                                <br />Like <tt>append</tt>, but removes all other options such as setting
+                        	the root device. Because vital options can be removed unintentionally 
+                        	with <tt>literal</tt>, this option cannot be set in the global options 
+                        	section.</p></li>
+                            <li><p><tt>ramdisk=<i>size</i></tt>
+                                <br />This specifies the size of the optional RAM disk. A value of zero 
+                        	indicates that no RAM disk should be created. 
+                        	If this variable is omitted, the RAM disk size configured into the boot 
+                        	image is used.</p></li>
+                            <li><p><tt>read-only</tt>
+                                <br />This specifies that the root file system should be mounted 
+                        	read-only. 
+                        	Typically, the system startup procedure re-mounts the root file system 
+                        	read-write later (e.g. after fsck'ing it).</p></li>
+                            <li><p><tt>read-write</tt> - This specifies that the root file system should
+                                be mounted read-write.</p></li>
+                            <li><p><tt>root=<i>root-device</i></tt>
+                                <br />This specifies the device that should be mounted as root file 
+                        	system.</p></li>
+                            <li><p><tt>proll=<i>filename</i></tt>
+                                <br />This should be used only for JavaStation flash installations. 
+                        	It specifies a file that will be loaded at boot time and executed in 
+                        	order to emulate old Sun v2 PROM on top of IEEE P1275 called PROLL.</p></li>
+                            <li><p><tt>initrd=<i>filename</i></tt>
+                                <br />This specifies the file that will be loaded at boot time as the 
+                        	initial RAM disk. Example:</p>
+                        	<p class="syn30">initrd=/images/initrd.img</p>
+                        	<p>SILO will not decompress the initial ramdisk, the Linux kernel will do 
+                        	that. If the initial ramdisk does not fit on one media (usually floppy), 
+                        	you can split it into several pieces and separate the file names in
+                        	the list by &quot;|&quot; characters. In this case, you have to provide 
+                        	a non-zero <tt>initrd-size</tt> and, if the images reside on different
+                        	media, <tt>initrd-prompt</tt> as well. Example (on the first floppy is
+                        	<i>initrd1.img</i>, on the second one <i>initrd2.img</i>. Both are 
+                        	always in the root directory, and the sum of the sizes of both images
+                        	is 1700000 Bytes:</p>
+                                <div class="syn30">initrd=/initrd1.img|/initrd2.img</div>
+                                <div class="syn30">initrd-size=1700000</div>
+                                <div class="syn30">initrd-prompt</div></li>
+                            <li><p><tt>initrd-size=<i>size</i></tt>
+                                <br />When  more  than one initial ramdisk part is specified in the 
+                        	<tt>initrd</tt> setting, this option is required to be the sum of both 
+                        	images mentioned on that line, in Bytes. This is required so that SILO 
+                        	can reserve space for the image, eventhough size of some parts has not 
+                        	been determined yet.</p></li>
+                            <li><p><tt>initrd-prompt</tt>
+                                <br />If more than one initial ramdisk part is specified, wait for the 
+                        	user pressing a key between loading the different images, so that the 
+                        	user can exchange media. 
+                        	This flag is needed if some initrd parts reside on the same device, 
+                        	but different removable media. On the other side, if you e.g. load one 
+                        	part from a floppy and the second part from a hard disk, this option 
+                        	is not needed (the question is who'd write something like that into 
+                        	silo.conf).</p></li>
+                             <li><p><tt>bootblock=<i>filename</i></tt>
+                                <br />For the <tt>other</tt> image section, if booting from some 
+                        	partition is desired but the boot block on that partition has been 
+                        	saved off to some file and the boot block in that partition contains 
+                        	something else, such as a SILO boot block),
+                        	this option specifies the name of the file where the bootblock has 
+                        	been saved to. SILO loads the image from that file, pretends as if 
+                        	it had loaded it from the specified partition, and executes it.
+                        	<br />This is for instance useful if you have Sun Solaris installed on
+                        	the first partition of the disk and want to install SILO into the 
+                        	master boot record (boot block of the first partition). In that case
+                        	you should first save the Solaris boot block into a file. Example:</p>
+                        	<p class="syn30">dd if=/dev/sda of=/boot/old.b bs=512 count=15 skip=1</p>
+                        	<p>After this, install SILO and add the following to
+                        	<tt>/etc/silo.conf</tt>:</p>
+                                <div class="syn30">other=1</div>
+                                <div class="syn60">bootblock=/boot/old.b</div>
+                        	<p>Note that this does not work correctly on UltraSPARC based machines at
+                        	this moment.</p></li>
+                            <li><p><tt>fill-reboot-cmd</tt>
+                                <br />This flag should be used only with Linux  kernels. If specified 
+                        	for an image, it causes the file <tt>/proc/sys/kernel/reboot-cmd</tt> 
+                        	to be initialized by the device SILO booted from, image name of the 
+                        	kernel being loaded and all arguments to it specified either in the 
+                        	configuration file, or in the input line. This means that if the user 
+                        	does not modify that file and reboots the system, it should load the 
+                        	same kernel as last time and pass it the same arguments.</p></li>
+                            <li><p><tt>pause-after</tt>
+                                <br />If this flag is specified, SILO will stop after loading the kernel 
+                        	(and initial ramdisks if specified) and will ask the user to press a 
+                        	key before continuing.</p></li>
+                            <li><p><tt>pause-message=<i>string</i></tt>
+                                <br />If <tt>pause-after</tt> is specified, this variable specifies the 
+                        	string to print to the user when asking him or her to press a key. 
+                        	The default <tt>pause-message</tt> is:</p>
+                                <p class="syn30">Press ENTER to continue.</p></li>
+                            <li><p><tt>single-key</tt>
+                                <br />This enables booting the image by hitting a single key when the 
+                        	cursor is located at the first character in the input line,without the 
+                        	need to press &lt;ENTER&gt; afterwards.
+                        	<tt>single-key</tt> requires that either the <tt>label</tt> of the
+                        	image or it's <tt>alias</tt> (or both) is a single character. If you
+                        	need  to specify parameters for such an image, or if you want to boot
+                        	some other image which happens to start with the same character you
+                        	will need to start the input line with at least one space which will
+                        	be removed before processing, but will disable this single-key 
+                        	feature.</p></li>
+                            <li><p><a name="solaris"><tt>solaris</tt></a>
+                                <br />This flag tells SILO that the image to be loaded is a Solaris 
+                        	kernel. This has been implemented so that users don't have to save the 
+                        	old Solaris boot block, or in case it has been lost.
+                        	SILO then tries to use the Solaris ufsboot second stage loader to load
+                        	the specified kernel image. The usual kernel name is
+                        	<tt>/kernel/unix</tt>. SILO automatically prepends the path
+                        	<tt>/platform/&lt;<i>platform</i>&gt;</tt> when needed. SILO also
+                        	recognises the special path name <tt>/kernel/unix</tt> with any device
+                        	and/or partition, and assumes the <tt>solaris</tt> option by default.</p>
+
+                        	<p><strong>Note that this method of loading Solaris might not work for 
+                                you</strong>, as it is quite error prone due to different versions
+                                of Solaris and PROM's.</p>
+
+                        	<p>Updates for the OpenBoot PROM (OBP) should be installed by loading
+                                the flash update image from a TFTP server, similar to installing an
+                                operating system from the network.</p>
+
+                        	<p>The recommended solution for sharing Solaris and Linux on the same 
+                        	disk is to install SILO into the Linux partition boot block as opposed
+                        	to the master boot block, and add PROM aliases to boot from the
+                        	different devices. For instance, if Solaris has been installed on
+                        	Linux device name <tt>/dev/sda1</tt>, and Linux on <tt>/dev/sda4</tt>,
+                        	then <tt>silo.conf</tt> could look like this:</p>
+                                <div class="syn30">timeout=50</div>
+                                <div class="syn30">partition=4</div>
+                                <div class="syn30">image=/boot/vmlinux</div>
+                                <div class="syn60">label=linux</div>
+                                <div class="syn60">root=/dev/sda4</div>
+                                <div class="syn60">other=1</div>
+                                <div class="syn60">label=solaris</div>
+                                <p>(See also the <a href="#examples">Examples</a> section).
+                        	After this, SILO needs to be invoked with the <tt>-t</tt> option, to
+                        	store the boot block into the same partition as the second stage
+                        	loader.</p>
+                        	<p>An example to set the fourth partition to be the default boot 
+                                device (from the EPROM):</p>
+                        	<p class="syn30">setenv boot-device /sbus/espdma/esp/sd@0,0:d</p>
+                        	or<br />
+                        	<div class="syn30">nvalias linux /sbus/espdma/esp/sd@0,0:d</div>
+                                <div class="syn30">nvalias solaris /sbus/espdma/esp/sd@0,0:a</div>
+                        	<p>so that one could already boot from the PROM either with
+                        	&quot;<tt>boot linux</tt>&quot;, or with &quot;<tt>boot
+                        	solaris</tt>&quot;. This also ensures that you can re-install
+                                an operating system without bothering another installation.</p>
+                           </li>
+                        </ul>
+                        
+                        <p><a name="examples"><strong>SILO configuration examples</strong></a></p>
+                        <p>A basic silo.conf file which can load the images with <tt>label</tt>
+                        &quot;linux&quot;, and &quot;old&quot; from the fifth partition on
+                        the first found SCSI hard disk drive:</p>
+                        <div class="syn30"># basic silo.conf example</div>
+                        <div class="syn30">timeout=50</div>
+                        <div class="syn30">partition=5</div>
+                        <div class="syn30">default=linux</div>
+                        <div class="syn30">root=/dev/sda5</div>
+                        <div class="syn30">read-only</div>
+                        <div class="syn30">image=/boot/vmlinux</div>
+                        <div class="syn60">label=linux</div>
+                        <div class="syn30">image=/boot/vmlinux.old</div>
+                        <div class="syn60">label=old</div>
+
+                        <p>A silo.conf that can boot the images with <tt>label</tt> &quot;linux&quot;
+                        and &quot;solaris&quot;. &quot;linux&quot; here is on the first partition of
+                        the third SCSI hard disk drive, and &quot;solaris&quot; on the first partition
+                        of the SCSI disk drive with SCSI ID 3.</p>
+
+                        <div class="syn30"># silo.conf example for dual boot linux and solaris</div>
+                        <div class="syn30">timeout=50</div>
+                        <div class="syn30">partition=1</div>
+                        <div class="syn30">default=linux</div>
+                        <div class="syn30">root=/dev/sdc1</div>
+                        <div class="syn30">image=/boot/vmlinux</div>
+                        <div class="syn60">label=linux</div>
+                        <div class="syn60">root=/dev/sdc1</div>
+                        <div class="syn60">read-only</div>
+                        <div class="syn30">other=/iommu/sbus/espdma/esp/sd@3,0;1</div>
+                        <div class="syn60">label=solaris</div>

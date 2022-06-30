@@ -1,0 +1,23 @@
+                        <p><a name="links"><strong>Links</strong></a></p>
+
+                        <ul>
+                            <li><a href="http://e2fsprogs.sourceforge.net">e2fsprogs</a>, utilities
+                                for ext2 file systems.</li>
+                            <li><a href="http://www.sparc-boot.org/elftoaout/">elftoaout</a>, the program
+                                for the converting of a 32-bit or 64-bit SPARC ELF image into a.out format.</li>
+                            <li><a href="http://sourceforge.net/projects/romfs/">genromfs</a>, the
+                                program for the creating of romfs filesystems.</li>
+                            <li><a href="http://git.or.cz/">Git</a>, the fast version control system.</li>
+                            <li><a href="http://sources.redhat.com/binutils/">GNU binutils</a></li>
+                            <li><a href="http://gcc.gnu.org/">GCC</a>, the GNU Compiler Collection.</li>
+                            <li><a href="http://www.linux.org/docs/ldp/howto/JavaStation-HOWTO/">JavaStation HOWTO</a></li>
+                            <li><a href="http://marc.theaimsgroup.com/?l=linux-sparc">Linux-Sparc</a> mailing list archives at MARC.</li>
+                            <li><a href="http://people.redhat.com/zaitcev/linux/">Pete Zaitcev's Linux
+                                page</a>. The flash programmer for the JavaStation OS Flash SIMM
+                        	(jsflash) can be found there, along with lots of other interesting
+                        	Linux goods.</li>
+                            <li><a href="http://docs.sun.com/coll/216.2">Sun OpenBoot Collection</a>, including
+                                the OpenBoot Command Reference Manuals</a></li>
+                            <li><a href="http://www.ultralinux.org/">UltraLinux.org</a> Home Page.</li>
+                        </ul>
+                        

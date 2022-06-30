@@ -1,0 +1,154 @@
+                        <p><a name="command"><strong>On the command line</strong></a></p>
+
+                        <p>Usually, when <tt>/sbin/silo</tt> is invoked without any command-line options, 
+                        it reads and checks the syntax of it's configuration file, and then installs
+                        and configures the boot loaders.</p>
+                    
+                        <p>You can however pass several arguments to <tt>/sbin/silo</tt>:</p>
+                        <ul>
+                            <li><p><tt>-r &lt;root_path&gt;</tt>
+                                <br />This does a <tt>chroot</tt> to <tt>&lt;root_path&gt;</tt> before
+                                preforming any other actions.
+                                In case you are creating a new root file system (e.g. your current
+                                root file system is NFS mounted and you are setting up an ext2 root
+                                file system in <tt>/mnt</tt>, then you should run <tt>silo</tt>
+                                after installing the directories <tt>boot, etc</tt> and <tt>sbin</tt>
+                                into <tt>/mnt</tt> with the &quot;<tt>-r</tt>&quot; argument. An
+                                example:</p>
+                                <p class="syn30">/mnt/sbin/silo -r /mnt</p></li>
+                            <li><p><tt>-b &lt;secondary&gt;</tt>
+                                <br />This tells SILO to use <tt>&lt;secondary&gt;</tt> as the second
+                                stage boot loader instead of <tt>/boot/second.b</tt>.</p></li>
+                            <li><p><tt>-i &lt;primary&gt;</tt>
+                                <br />Install <tt>&lt;primary&gt;</tt> as the first stage loader instead
+                                of the default one. Depending on the architecture of the machine and
+                                other arguments the default is either <tt>/boot/first.b,
+                                /boot/ultra.b</tt> or <tt>boot/fd.b</tt>.</p></li>
+                            <li><p><tt>-C &lt;config&gt;</tt>
+                                <br />Specify and alternate configuration file instead of the default
+                                <tt>/etc/silo.conf</tt>. The configuration file must reside on the
+                                same <u>physical</u> disk as the secondary boot loader (It can
+                                reside on a different partition).</p></li>
+                            <li><p><tt>-S &lt;backup_file&gt;</tt>
+                                <br />This forces the saving of the old boot block into 
+                                <tt>&lt;backup_file&gt;</tt>.</p></li>
+                            <li><p><tt>-s &lt;backup_file&gt;</tt>
+                                <br />This forces the saving of the old boot block into
+                                <tt>&lt;backup_file&gt;</tt> if and only if 
+                                <tt>&lt;backup_file&gt;</tt> does not exist yet.</p></li>
+                            <li><p><tt>-p {0|2}</tt>
+                                <br />Force the EPROM version to be <tt>0</tt> or <tt>2</tt>. The
+                                default is to auto-detect the EPROM version.</p></li>
+                            <li><p><tt>-f</tt>
+                                <br />Force the overwriting of the boot block.</p></li>
+                            <li><p><tt>-t</tt> 
+                                <br />Stores the boot block into the same partition as the second stage
+                                loader. By default, when using a SCSI or an IDE disk, SILO writes the 
+                                boot block into the master boot (the boot block of the partition starting
+                                at cylinder 0). This behaviour can be changed with the
+                                &quot;<tt>-t</tt>&quot; argument.</p></li>
+                            <li><p><tt>-V</tt>
+                                <br />Displays the version of SILO.</p></li>
+                            <li><p><tt>-F</tt>
+                                <br />Generate the boot block for booting from the <tt>romfs</tt> file
+                                system. To create a bootable <tt>romfs</tt> file system (which is
+                                usually on a floppy disk) prepare the tree for that file system, and
+                                run <tt>genromfs(8)</tt> while passing the following arguments to it:</p>
+                                <p class="syn30">genromfs -a 512 -A 2048,/...</p>
+                                <p>After this mount the tree and run <tt>silo</tt> with the
+                                &quot;<tt>-f</tt>&quot; option.
+                                An example:</p>
+                                <div class="syn30">genromfs -d <i>directory</i>/ -f <i>device</i> -a 512 -A 2048,/..</div>
+                                <div class="syn30">mount -t romfs <i>device mountpoint</i></div>
+                                <div class="syn30">silo -r <i>mountpoint</i> -i /boot/fd.b -F</div>
+                                <div class="syn30">umount <i>mountpoint</i></div></li>
+                            <li><p><tt>-J &lt;flash-image&gt;</tt>
+                                <br />Generate the bootblock for booting a JavaStation off a flash
+                                image. To create it, you should prepare the tree for that file system,
+                                and run <tt>genromfs(1)</tt>. You must use <tt>-a512</tt> as an
+                                argument to <tt>genromfs</tt>. There must be 1kB of space before the
+                                file system for the ELF boot block.
+                                An example of the procedure:</p>
+                                <div class="syn30">dd if=/dev/zero of=<i>flash.img</i> bs=1k count=1</div>
+                                <div class="syn30">genromfs -a 512 -f <i>romfs.img</i> -d <i>flash/</i></div>
+                                <div class="syn30">cat <i>romfs.img</i> &gt;&gt; <i>flash.img</i></div>
+                                <div class="syn30">rm -f <i>romfs.img</i></div>
+                                <div class="syn30">losetup /dev/loop0 -o 1024 <i>flash.img</i></div>
+                                <div class="syn30">mount -t romfs -o ro /dev/loop0 /mnt</div>
+                                <div class="syn30">silo -J <i>flash.img</i> -i /boot/ieee32.b -r /mnt</div>
+                                <div class="syn30">umount /mnt</div>
+                                <div class="syn30">losetup -d /dev/loop0</div>
+                                <div class="syn30">jsflash <i>flash.img</i></div></li>
+                            <li><p><tt>-u</tt>
+                                <br />Assume that the machine is an UltraSPARC. The default is obviously
+                                the machine that <tt>/sbin/silo</tt> is being run on. This can be
+                                useful for instance if you are planning to move a hard disk drive from
+                                a 32-bit to a 64-bit machine. You run <tt>/sbin/silo -f -u</tt>, halt
+                                the machine, and move the disk.</p></li>
+                            <li><p><tt>-U</tt>
+                                <br />Assume that the machine is not an UltraSPARC.</p></li>
+                            <li><p><tt>-v</tt>
+                                <br />Print the EPROM version and exit.</p></li>
+                            <li><p><tt>-a</tt>
+                                <br />Usually when silo is running it reads and checks the syntax of the
+                                <tt>silo.conf</tt> file that will be used when the system boots, which
+                                is generally a good idea. Sometimes, however, you may want to create a
+                                boot block when <tt>silo.conf</tt> is not or not yet available. This 
+                                will allow this check to fail. <strong>USE THIS WITH CAUTION!</strong></p></li>
+                        </ul>
+
+                        <p><a name="boottime"><strong>At boot time</strong></a></p>
+
+                        <p>When the PROM boots from a disk and partition on which SILO is installed, the
+                        first stage boot loader will load the second one very quickly, and the string
+                        &quot;<tt>SILO</tt>&quot; will be printed to the screen. If something went
+                        wrong while loading the second stage boot loader, SILO might print less
+                        characters from that string and die, e.g. &quot;<tt>SIL</tt>&quot; means it 
+                        loaded a second stage boot loader, but with wrong magic. See also 
+                        <a href="how.html">How does it work?</a></p>
+                        
+                        <p>After SILO has been loaded succesfully it will print the string 
+                        <tt>boot:</tt>, and then waits for either the <tt>timeout</tt> if specified in
+                        <a href="config.html"><tt>silo.conf</tt></a>, or user input.</p>
+                        <ul>
+                            <li>Press <tt>&lt;enter&gt;</tt> (an empty line), which will cause the
+                                &quot;<tt>default</tt>&quot; entry from the configuration file
+                                to be loaded.</li>
+                            <li>Type <tt>halt</tt>, which will drop you to the Sun EPROM.</li>
+                            <li>Type <tt>help</tt> to display help information.</li>
+                            <li>Press <tt>&lt;tab&gt;</tt>, which lists the aliases and labels
+                                from the configuration file.</li>
+                            <li>Enter an <tt>alias</tt> or <tt>label</tt> that is present in the 
+                                configuration file, plus additional arguments.</li>
+                            <li>Enter a full path to an image to be loaded.</li>
+                        </ul>
+                        <p>The arguments  you pass on the line after the name of the image to be
+                        loaded are basically kernel arguments which are normally specified in
+                        the <tt>append</tt> variable in <a href="config.html"><tt>silo.conf</tt></a>.
+                        In addition to that, several special arguments are handled by SILO internally
+                        and are not passed to the kernel. These arguments include:</p>
+                        <ul>
+                            <li><tt>initrd</tt></li>
+                            <li><tt>initrd-size=<i>number</i></tt></li>
+                            <li><tt>initrd-prompt</tt></li>
+                            <li><tt>pause-after</tt></li>
+                            <li><tt>show-arguments</tt></li>
+                        </ul>
+                        <p><tt>show-arguments</tt> causes the arguments which will be passed to the 
+                        kernel to be printed on the screen before the kernel is loaded, the 
+                        other options resemble flags and string variables found in 
+                        <a href="config.html"><tt>silo.conf</tt></a>.</p>
+                        
+                        <p>SILO has support for filename completion on the command-line prompt by
+                        pressing the <tt>&lt;tab&gt;</tt> key.</p>
+
+                        <p><a name="examples"><strong>Examples</strong></a></p>
+                        <p class="syn30">boot: linux</p>
+                        <p class="syn30">boot: linux init=/bin/sh</p>
+                        <p class="syn30">boot: 1/boot/vmlinux</p>
+                        <p class="syn30">boot: /pci@1f,4000/ide/ata@0,0/cmdk@0,0;4/boot/vmlinux.new root=/dev/hda4</p>
+                        <p class="syn30">boot: sd(0,2,0)2/boot/vmlinux.gz root=/dev/sdc2 init=/bin/sh ro</p>
+                        <p class="syn30">boot: cat /etc/silo.conf</p>
+                        <p class="syn30">boot: cat /sbus/espdma@1,280000/esp/sd@2,0;5/etc/inittab</p>
+                        <p class="syn30">boot: ls -lt /lib/modules/</p>
+                        <p class="syn30">boot: ls /pci@1f,4000/ide/ata@0,0/cmdk@0,0;2/lib/</p>

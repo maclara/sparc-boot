@@ -1,0 +1,57 @@
+                        <p><a name="usingtilo.html"><strong>Using TILO</strong></a></p>
+
+                        <p>TILO, the Trivial Image LOader, is used for building a simple TFTP boot loader
+                        which embodies several kernel images for different Sun
+                        <a href="config.html#arch">architectures</a> and a ramdisk root image. The 
+                        images are gzip-ped to minimize memory usage.</p>
+
+                        <p>After starting the boot loader, the architecture is detected, the appropriate
+                        kernel is unpacked and then the booting procedure is launched.</p>
+
+                        <p>Please note that <tt>maketilo</tt> is an internal command used by the 
+                        <tt>tilo</tt> script. There is no need to use it directly.</p>
+
+                        <p>TILO is available with the <a href="index.html">SILO</a> package from
+                        <a href="http://www.sparc-boot.org/">http://www.sparc-boot.org/</a>.</p>
+
+                        <p><a name="options"><strong>TILO Options</strong></a></p>
+
+                        <p>The general form to use TILO is:</p>
+                        <p class="syn30">tilo [-o output] &lt;ELF kernel images&gt; &lt;root image&gt;</p>
+                        <p>where:</p>
+                        <ul>
+                           <li><p><tt>&lt;-o output&gt;</tt>
+                              <br />is the name of the output file to write the TILO image to. If not 
+                              specified, it will be named <tt>tftpboot.img</tt>.</p></li>
+                           <li><p><tt>&lt;ELF kernel images&gt;</tt>
+                              <br />is a list of either a single <tt>sun4cdm</tt> or <tt>sun4u</tt> 
+                              image, or one of each, in ELF format.</p></li>
+                           <li><p><tt>&lt;root image&gt;</tt>
+                              <br />is the initial ramdisk image to append to the kernel image.  It 
+                              could be compressed as well.</p></li>
+                        </ul>
+
+                        <p><a name="build"><strong>Building Images with TILO</strong></a></p>
+
+                        <p>There are basically three steps to build a boot image:</p>
+                        <ol>
+                           <li>Prepare a kernel image for each supported architecture in uncompressed
+                              ELF format. Currently TILO expects atleast one <tt>sun4u</tt> or
+                              <tt>sun4cdm</tt> kernel. You can only supply one of each kind. It will 
+                              be possible to add Sun4 support in the future as well.</li>
+                          <li>Prepare a root image for the initial ramdisk. It can be compressed, or
+                              raw. TILO will compress it when needed.</li>
+                          <li>Run the "tilo" script with the following parameters:
+                              <p class="syn30">tilo [-o output] &lt;ELF kernel images&gt; &lt;root image&gt;</p></li>
+                        </ol>
+                        <p>A boot image will be created which contains everything necessary to boot on
+                        each included architecture.</p>
+
+                        <p><a name="credits"><strong>Credits</strong></a></p>
+
+                        <p>TILO has been written by Jan Vondrak and is now being maintained by Ben Collins.</p>
+                        <p><a name="license"><strong>Code License</strong></a></p>
+
+                        <p>TILO has been released under the same license as <a href="index.html">SILO</a>,
+                        the GNU General Public License. 
+                        See also <a href="license.html">Code License</a>.</p>
