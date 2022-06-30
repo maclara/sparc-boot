@@ -105,11 +105,11 @@
                         wrong while loading the second stage boot loader, SILO might print less
                         characters from that string and die, e.g. &quot;<tt>SIL</tt>&quot; means it 
                         loaded a second stage boot loader, but with wrong magic. See also 
-                        <a href="how.html">How does it work?</a></p>
+                        <a href="how.shtml">How does it work?</a></p>
                         
                         <p>After SILO has been loaded succesfully it will print the string 
                         <tt>boot:</tt>, and then waits for either the <tt>timeout</tt> if specified in
-                        <a href="config.html"><tt>silo.conf</tt></a>, or user input.</p>
+                        <a href="config.shtml"><tt>silo.conf</tt></a>, or user input.</p>
                         <ul>
                             <li>Press <tt>&lt;enter&gt;</tt> (an empty line), which will cause the
                                 &quot;<tt>default</tt>&quot; entry from the configuration file
@@ -124,7 +124,7 @@
                         </ul>
                         <p>The arguments  you pass on the line after the name of the image to be
                         loaded are basically kernel arguments which are normally specified in
-                        the <tt>append</tt> variable in <a href="config.html"><tt>silo.conf</tt></a>.
+                        the <tt>append</tt> variable in <a href="config.shtml"><tt>silo.conf</tt></a>.
                         In addition to that, several special arguments are handled by SILO internally
                         and are not passed to the kernel. These arguments include:</p>
                         <ul>
@@ -137,7 +137,7 @@
                         <p><tt>show-arguments</tt> causes the arguments which will be passed to the 
                         kernel to be printed on the screen before the kernel is loaded, the 
                         other options resemble flags and string variables found in 
-                        <a href="config.html"><tt>silo.conf</tt></a>.</p>
+                        <a href="config.shtml"><tt>silo.conf</tt></a>.</p>
                         
                         <p>SILO has support for filename completion on the command-line prompt by
                         pressing the <tt>&lt;tab&gt;</tt> key.</p>

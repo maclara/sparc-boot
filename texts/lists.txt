@@ -17,7 +17,7 @@
                                list ARChives at AIMS</a>.</p></li>
                         </ul>
                         <p>Information about SPARC specific mailing lists for Linux distributions can be 
-                        found at <a href="http://www.ultralinux.org/lists.html">UltraLinux.org</a>.
-                        This is also the place where <a href="http://www.ultralinux.org/faq.html">
+                        found at <a href="http://www.ultralinux.org/lists.shtml">UltraLinux.org</a>.
+                        This is also the place where <a href="http://www.ultralinux.org/faq.shtml">
                         Frequently Asked Questions</a> regarding SILO are answered.</p>
                         

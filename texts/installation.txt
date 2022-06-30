@@ -14,7 +14,7 @@
                         <p>For the building of the first and second stage boot loader, and TILO  
                         (Linux only), you will also need:
                         <ul>
-                           <li><a href="http://www.sparc-boot.org/elftoaout/">elftoaout</a>, for the
+                           <li><a href="elftoaout/">elftoaout</a>, for the
                                converting of 32-bit or 64-bit SPARC ELF images to a.out format</li>
                            <li><a href="http://e2fsprogs.sourceforge.net/">e2fsprogs</a> package.
                                With Linux distributions, you need the header files included for instance

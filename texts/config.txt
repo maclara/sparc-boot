@@ -165,7 +165,7 @@
                         	the boot prompt.</p> </li>
                             <li><p><tt>partition-boot</tt>
                                 <br />This flag causes the same functionality as the
-                                <a href="usingsilo.html#command"><tt>-t</tt></a> command
+                                <a href="usingsilo.shtml#command"><tt>-t</tt></a> command
                                 line option for the silo program, which stores the boot block into
                                 the same partition as the second stage loader.</p></li>
                             <li><p><tt>password=<i>password</i></tt>
@@ -182,7 +182,7 @@
                             <li><p><tt>secondary=<i>filename</i></tt>
                                 <br />Forces the second stage boot loader to be other than
                                 <tt>/boot/second.b</tt>. Same as the 
-                                <a href="usingsilo.html#command"><tt>-b</tt></a> command line option.
+                                <a href="usingsilo.shtml#command"><tt>-b</tt></a> command line option.
                                 This can be overriden by the command line option.</p></li>
                             <li><p><tt>timeout=<i>tsecs</i></tt>
                                 <br />Sets a timeout (in tenths of a second) for keyboard input. 

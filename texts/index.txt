@@ -55,5 +55,5 @@
                         <p>The Trivial Image Loader for SPARC (TILO) is also included in the SILO package.
                         TILO is a tool for building a simple TFTP boot loader which embodies several
                         kernel images for different Sun architectures and a ramdisk root image in 
-                        a compressed form. See <a href="usingtilo.html">Using TILO</a> for more
+                        a compressed form. See <a href="usingtilo.shtml">Using TILO</a> for more
                         information.</p>

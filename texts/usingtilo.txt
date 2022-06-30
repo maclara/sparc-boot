@@ -1,8 +1,8 @@
-                        <p><a name="usingtilo.html"><strong>Using TILO</strong></a></p>
+                        <p><a name="usingtilo.shtml"><strong>Using TILO</strong></a></p>
 
                         <p>TILO, the Trivial Image LOader, is used for building a simple TFTP boot loader
                         which embodies several kernel images for different Sun
-                        <a href="config.html#arch">architectures</a> and a ramdisk root image. The 
+                        <a href="config.shtml#arch">architectures</a> and a ramdisk root image. The 
                         images are gzip-ped to minimize memory usage.</p>
 
                         <p>After starting the boot loader, the architecture is detected, the appropriate
@@ -11,8 +11,8 @@
                         <p>Please note that <tt>maketilo</tt> is an internal command used by the 
                         <tt>tilo</tt> script. There is no need to use it directly.</p>
 
-                        <p>TILO is available with the <a href="index.html">SILO</a> package from
-                        <a href="http://www.sparc-boot.org/">http://www.sparc-boot.org/</a>.</p>
+                        <p>TILO is available with the <a href="index.shtml">SILO</a> package from
+                        <a href="/~bcollins/www.sparc-boot.org/">http://www.sparc-boot.org/</a>.</p>
 
                         <p><a name="options"><strong>TILO Options</strong></a></p>
 
@@ -52,6 +52,6 @@
                         <p>TILO has been written by Jan Vondrak and is now being maintained by Ben Collins.</p>
                         <p><a name="license"><strong>Code License</strong></a></p>
 
-                        <p>TILO has been released under the same license as <a href="index.html">SILO</a>,
+                        <p>TILO has been released under the same license as <a href="index.shtml">SILO</a>,
                         the GNU General Public License. 
-                        See also <a href="license.html">Code License</a>.</p>
+                        See also <a href="license.shtml">Code License</a>.</p>

@@ -19,7 +19,7 @@
                         and the handling of compressed files. It also provides a command-line
                         interface to interactively select entries from the configuration file, to
                         add boot parameters, or to load a path you entered on the SILO command 
-                        line prompt. See <a href="usingsilo.html">Using SILO</a> for more information about
+                        line prompt. See <a href="usingsilo.shtml">Using SILO</a> for more information about
                         using the SILO prompt.</p>
 
                         <p>The program <tt>/sbin/silo</tt> is used to install the first stage loader by 
@@ -34,7 +34,7 @@
                         <p>If the file <tt>old.b</tt> can't be found in the <tt>/boot</tt> directory, the
                         old boot loader will be copied there by <tt>/sbin/silo</tt>. </p>
 
-                        <p>The configuration file <a href="config.html"><tt>/etc/silo.conf</tt></a> is 
+                        <p>The configuration file <a href="config.shtml"><tt>/etc/silo.conf</tt></a> is 
                         parsed by the actual boot loader at boot time. 
                         This means that the <tt>/sbin/silo</tt> program must be run only if you 
                         install a new version of SILO or if you move the second stage 

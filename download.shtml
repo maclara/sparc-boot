@@ -6,7 +6,7 @@
    <head>
       <!--#set var="last-mod-by" value="pkrul at auxio.org" -->
       <!--#config timefmt="%A %B %d, %Y" -->
-      <title>SILO - The Sparc Improved Boot Loader</title>
+      <title>SILO - Download</title>
       <meta name="keywords" content="SILO, Sparc, UltraSPARC, bootblock,
          bootloader, silo.conf, SparcLinux, UltraLinux, sparc-boot.org" />
       <link type="image/x-icon" rel="SHORTCUT ICON" href="images/favicon.ico" />
@@ -49,14 +49,14 @@
                <table cellpadding="5" cellspacing="0" border="1">
                   <tr>
                      <td width="620" class="front" valign="top">
-<!--#include virtual="texts/index.txt" -->
+<!--#include virtual="texts/download.txt" -->
                      </td>
                   </tr>
                   <tr>
                      <td align="right">
                         <small class="quitesmall">
                            Last update:
-                           <!--#flastmod file="texts/index.txt" --> 
+                           <!--#flastmod file="texts/download.txt" --> 
                            <!--#echo var="last-mod-by" --> &nbsp;
                         </small>
                      </td>

@@ -3,7 +3,7 @@
                         <ul>
                             <li><a href="http://e2fsprogs.sourceforge.net">e2fsprogs</a>, utilities
                                 for ext2 file systems.</li>
-                            <li><a href="http://www.sparc-boot.org/elftoaout/">elftoaout</a>, the program
+                            <li><a href="elftoaout/">elftoaout</a>, the program
                                 for the converting of a 32-bit or 64-bit SPARC ELF image into a.out format.</li>
                             <li><a href="http://sourceforge.net/projects/romfs/">genromfs</a>, the
                                 program for the creating of romfs filesystems.</li>

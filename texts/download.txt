@@ -2,7 +2,7 @@
 
                         <p>The latest version of the SILO package can be found at</p>
                         <ul>
-                            <li><a href="http://www.sparc-boot.org/pub/silo/">
+                            <li><a href="pub/silo/">
                                 http://www.sparc-boot.org/pub/silo</a></li>
                         </ul>
 
