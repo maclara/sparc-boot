@@ -14,11 +14,11 @@
                         You can also find more information about Git and related tools at
                         <a href="http://git.or.cz/">http://git.or.cz</a></p>
                         <p>The command to clone the SILO source with GIT is:</p>
-                        <p><tt>git clone git://git.kernel.org/pub/scm/linux/kernel/git/bcollins/silo.git</tt></p>
+                        <p><tt>git clone git://git.kernel.org/pub/scm/linux/kernel/git/davem/silo.git</tt></p>
                         <p>In addition, the Git tree can be accessed via a web interface at</p>
                         <ul>
-                           <li><a href="http://www.kernel.org/git/?p=linux/kernel/git/bcollins/silo.git;a=tree">
-                           http://www.kernel.org/git/?p=linux/kernel/git/bcollins/silo.git;a=tree</a></li>
+                           <li><a href="http://www.kernel.org/git/?p=linux/kernel/git/davem/silo.git;a=tree">
+                           http://www.kernel.org/git/?p=linux/kernel/git/davem/silo.git;a=tree</a></li>
                         </ul>
 
                         <p><a name="mirrors"><strong>Mirrors</strong></a></p>
