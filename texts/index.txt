@@ -57,3 +57,5 @@
                         kernel images for different Sun architectures and a ramdisk root image in 
                         a compressed form. See <a href="usingtilo.shtml">Using TILO</a> for more
                         information.</p>
+
+			<p><a target="_blank" href="https://github.com/maclara/sparc-boot">Website Git Repo</a></p>

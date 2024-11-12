@@ -4,7 +4,7 @@
    "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
    <head>
-      <!--#set var="last-mod-by" value="pkrul at auxio.org" -->
+      <!--#set var="last-mod-by" value="bcollins at ubuntu.com" -->
       <!--#config timefmt="%A %B %d, %Y" -->
       <title>SILO - Download</title>
       <meta name="keywords" content="SILO, Sparc, UltraSPARC, bootblock,
